@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>fr.gdai.project</groupId>
+    <artifactId>Projet_Arduino</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
+    <properties>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+    </properties>
+
+    <dependencies>
+        <!-- ****************** Spring 与 SpringMVC 相关 ****************** -->
+        <!-- SpringMVC: 依赖了 Spring 的核心依赖包 -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>4.3.5.RELEASE</version>
+        </dependency>
+
+        <!-- SpringMVC: 需要使用到 servlet API -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- JSON 系列化/反序列化工具-->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.12.2</version>
+        </dependency>
+
+        <!-- 自定义包：openfoodfact -->
+        <dependency>
+            <groupId>fr.gdai.project</groupId>  <!--自定义-->
+            <artifactId>Projet_Adruino</artifactId>    <!--自定义-->
+            <version>1.0</version> <!--自定义-->
+            <scope>system</scope> <!--system，类似provided，需要显式提供依赖的jar以后，Maven就不会在Repository中查找它-->
+            <systemPath>${basedir}/libs/openfoodfacts-changed-1.0.001-SNAPSHOT.jar</systemPath> <!--项目根目录下的lib文件夹下，也可以是本机其它目录的绝对路径-->
+        </dependency>
+
+        <!-- ****************** JUnit 与测试相关 ****************** -->
+        <!-- Junit 测试 -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Spring 整合 Junit -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>4.3.5.RELEASE</version>
+        </dependency>
+
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- tomcat 插件 -->
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.1</version>
+                <configuration>
+                    <port>8888</port>
+                    <path>/arduino_project</path>
+                    <uriEncoding>utf-8</uriEncoding>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+
+</project>
