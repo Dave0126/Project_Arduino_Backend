@@ -39,10 +39,10 @@
 
         <!-- 自定义包：openfoodfact -->
         <dependency>
-            <groupId>fr.gdai.project</groupId>  <!--自定义-->
-            <artifactId>Projet_Adruino</artifactId>    <!--自定义-->
-            <version>1.0</version> <!--自定义-->
-            <scope>system</scope> <!--system，类似provided，需要显式提供依赖的jar以后，Maven就不会在Repository中查找它-->
+            <groupId>fr.gdai.project</groupId>          <!--自定义-->
+            <artifactId>Projet_Adruino</artifactId>     <!--自定义-->
+            <version>1.0.001</version>                  <!--自定义-->
+            <scope>system</scope>   <!-- system，类似provided，需要显式提供依赖的jar以后，Maven就不会在Repository中查找它 -->
             <systemPath>${basedir}/libs/openfoodfacts-changed-1.0.001-SNAPSHOT.jar</systemPath> <!--项目根目录下的lib文件夹下，也可以是本机其它目录的绝对路径-->
         </dependency>
 
