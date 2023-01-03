@@ -30,7 +30,7 @@ public class ApplicationTest {
 
         Product product = productResponse.getProduct();
 
-        System.out.println(product.getProductName());
+        System.out.println("Product name: "+ product.getProductName());
         System.out.println("Generic name: " + product.getGenericName());
         System.out.println("Product code: " + product.getCode());
 
