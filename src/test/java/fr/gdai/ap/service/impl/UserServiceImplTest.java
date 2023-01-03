@@ -18,10 +18,30 @@ public class UserServiceImplTest {
     private UserServiceImpl userService;
 
     @Autowired
-    private User user;
+    User user;
 
     @Test
     public void addProductByUser() {
+        String barcode = "3228886043714";
+        userService.addProductByUser(barcode);
+    }
+
+    @Test
+    public void register() {
+        User userTest1 = new User("gdai", 24);
+        System.out.println(userService.register(userTest1));
+
+        User userTest2 = new User("gdai", 25);
+        System.out.println(userService.register(userTest2));
+
+        User userTest3 = new User("guohao", 25);
+        System.out.println(userService.register(userTest3));
+    }
+
+    @Test
+    public void modifyUserAndAddProduct(){
+        user.setName("test");
+        user.setAge(20);
         String barcode = "3228886043714";
         userService.addProductByUser(barcode);
     }
