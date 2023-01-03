@@ -7,6 +7,6 @@ import org.springframework.context.annotation.Import;
 
 @Configuration
 @Import({MyOpenFoodFactsWrapper.class})
-@ComponentScan({"fr.gdai.ap.service"})
+@ComponentScan({"fr.gdai.ap.service", "fr.gdai.ap.domain"})
 public class SpringConfig {
 }

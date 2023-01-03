@@ -42,6 +42,7 @@ public class ApplicationTest {
         System.out.println("=== Nutriments ===");
         Nutriments nutriments = product.getNutriments();
         if (nutriments != null) {
+            System.out.println(nutriments);
             System.out.println(
                     String.format(
                             " * Calcium=%s%s", nutriments.getCalciumValue(), nutriments.getCalciumUnit()));

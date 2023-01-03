@@ -1,24 +1,34 @@
 package fr.gdai.ap.controller;
 
+import fr.gdai.ap.domain.MyProduct;
+import fr.gdai.ap.service.impl.MyProductServiceImpl;
+import fr.gdai.ap.utils.Result;
+import fr.gdai.ap.utils.ResultCode;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
+@RequestMapping("/product")
 public class AppController {
-    @RequestMapping("/save")
-    // 2.3 	设置当前操作的返回值类型, 将该方法的返回值作为响应体返回给浏览器
-    @ResponseBody
-    public String save() {
-        System.out.println("user saved!");
-        return "{'module':'springmvc:save()'}";
+
+    @Autowired
+    private MyProductServiceImpl productService;
+
+    @GetMapping("/{barcode}")
+    public Result getProduct(@PathVariable String barcode) {
+        Integer resultCode;
+        String msg;
+        MyProduct product = productService.transferOpenStackProduct2MyProduct(barcode);
+        if(product == null){
+            resultCode = ResultCode.SELECT_ERR;
+            msg = "product NOT found";
+        } else {
+            resultCode = ResultCode.SELECT_SUCC;
+            msg = "product found";
+        }
+        return new Result(resultCode, product, msg);
     }
 
-    @RequestMapping("/delect")
-    @ResponseBody
-    public String delect() {
-        System.out.println("user delected!");
-        return "{'module':'springmvc:delect()'}";
-    }
 }
 
