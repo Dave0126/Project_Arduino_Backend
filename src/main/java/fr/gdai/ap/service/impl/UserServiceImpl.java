@@ -25,14 +25,15 @@ public class UserServiceImpl implements UserService {
     private MyProductServiceImpl myProductService;
 
     @Override
-    public boolean register(User user) {
-        boolean execResult = false;
+    public boolean register(User newUser) {
+        if(newUser.getName() == null){
+            return false;
+        }
         if ( !userMap.containsKey(user.getName())) {
             userMap.put(user.getName(), user);
-            execResult = true;
         }
         System.out.println("size of userMap =" + userMap.size());
-        return execResult;
+        return true;
     }
 
     @Override

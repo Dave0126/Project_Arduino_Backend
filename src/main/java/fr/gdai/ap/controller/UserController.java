@@ -5,10 +5,7 @@ import fr.gdai.ap.service.impl.UserServiceImpl;
 import fr.gdai.ap.utils.Result;
 import fr.gdai.ap.utils.ResultCode;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/user")
@@ -31,4 +28,9 @@ public class UserController {
         return new Result(resultCode, null, msg);
     }
 
+    @PostMapping("/{barcode}")
+    public Result addProductByUser(@PathVariable String barcode){
+        userService.addProductByUser(barcode);
+        return new Result(ResultCode.INSERT_SUCC, null);
+    }
 }
