@@ -25,22 +25,38 @@ public class UserServiceImpl implements UserService {
     private MyProductServiceImpl myProductService;
 
     @Override
-    public boolean register(User newUser) {
-        if(newUser.getName() == null){
-            return false;
+    public boolean register(User user) {
+        boolean result = false;
+        if(user.getName() == null){
+            return result;
         }
         if ( !userMap.containsKey(user.getName())) {
             userMap.put(user.getName(), user);
+            result = true;
         }
         System.out.println("size of userMap =" + userMap.size());
-        return true;
+        return result;
     }
 
     @Override
-    public void addProductByUser(String barcode) {
+    public String addProductByUser(String name, String barcode) {
+        if ( !userMap.containsKey(name)) {
+            return "The username you entered does not exist!";
+        }
+        User userP = userMap.get(name);
         product = myProductService.transferOpenStackProduct2MyProduct(barcode);
-        user.getProductList().add(product);
-        System.out.println(user);
+        if( product == null){
+            return "The barcode you entered does not exist!";
+        }
+        if(!userP.getProductList().add(product)){
+            return "Failed to add product for user : " + name;
+        }
+        System.out.println(userP);
+        return "Successfully add product for user : " + name;
+    }
+
+    public User showUserByName(String name){
+        return userMap.get(name);
     }
 
 }

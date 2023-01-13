@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -14,11 +15,13 @@ public class User {
     private List<MyProduct> productList;
 
     public User() {
+        this.productList = new ArrayList<>();
     }
 
     public User(String name, int age) {
         this.name = name;
         this.age = age;
+        this.productList = new ArrayList<>();
     }
 
     public String getName() {

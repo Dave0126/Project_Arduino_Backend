@@ -5,16 +5,19 @@ import fr.gdai.ap.service.impl.UserServiceImpl;
 import fr.gdai.ap.utils.Result;
 import fr.gdai.ap.utils.ResultCode;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
+@Controller
 @RequestMapping("/user")
 public class UserController {
 
     @Autowired
     private UserServiceImpl userService;
 
-    @PostMapping
+
+    @RequestMapping("/register")
+    @ResponseBody
     public Result register(@RequestBody User user){
         Integer resultCode;
         String msg;
@@ -28,9 +31,10 @@ public class UserController {
         return new Result(resultCode, null, msg);
     }
 
-    @PostMapping("/{barcode}")
-    public Result addProductByUser(@PathVariable String barcode){
-        userService.addProductByUser(barcode);
-        return new Result(ResultCode.INSERT_SUCC, null);
+    @RequestMapping("/addProduct")
+    @ResponseBody
+    public Result addProductByUser(String username, String barcode){
+        String msg = userService.addProductByUser(username, barcode);
+        return new Result(ResultCode.INSERT_SUCC, userService.showUserByName(username), msg);
     }
 }

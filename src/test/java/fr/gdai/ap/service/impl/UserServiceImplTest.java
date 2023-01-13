@@ -23,7 +23,7 @@ public class UserServiceImplTest {
     @Test
     public void addProductByUser() {
         String barcode = "3228886043714";
-        userService.addProductByUser(barcode);
+        userService.addProductByUser("gdai", barcode);
     }
 
     @Test
@@ -40,9 +40,9 @@ public class UserServiceImplTest {
 
     @Test
     public void modifyUserAndAddProduct(){
-        user.setName("test");
-        user.setAge(20);
+        User testUser = new User("test", 25);
+        userService.register(testUser);
         String barcode = "3228886043714";
-        userService.addProductByUser(barcode);
+        userService.addProductByUser("test", barcode);
     }
 }
