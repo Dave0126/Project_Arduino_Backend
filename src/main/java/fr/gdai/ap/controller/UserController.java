@@ -33,6 +33,7 @@ public class UserController {
 
     @RequestMapping("/addProduct")
     @ResponseBody
+    // TODO 尝试使用状态码区分msg，将更改相应Service内的代码
     public Result addProductByUser(String username, String barcode){
         String msg = userService.addProductByUser(username, barcode);
         return new Result(ResultCode.INSERT_SUCC, userService.showUserByName(username), msg);
