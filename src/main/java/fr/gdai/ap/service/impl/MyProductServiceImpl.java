@@ -33,7 +33,7 @@ public class MyProductServiceImpl implements MyProductService {
         productNutriment.setCarbohydrates(productResponse.getProduct().getNutriments().getCarbohydrates100G());
         productNutriment.setEnergy(productResponse.getProduct().getNutriments().getEnergyKcal());
 
-        myProduct.setCode(barcode);
+        myProduct.setBarcode(barcode);
         myProduct.setName(productResponse.getProduct().getProductName());
         myProduct.setQuantity(productResponse.getProduct().getProductQuantity());
         myProduct.setIngredients(Arrays.copyOfRange(productResponse.getProduct().getIngredients(),0,5));

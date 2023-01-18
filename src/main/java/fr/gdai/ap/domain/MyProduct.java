@@ -15,7 +15,7 @@ import java.util.Arrays;
 @Component
 public class MyProduct {
     private String name;
-    private String code;
+    private String barcode;
     /**
      * Top 5 ingredients
      */
@@ -27,9 +27,9 @@ public class MyProduct {
     public MyProduct() {
     }
 
-    public MyProduct(String name, String code, Ingredient[] ingredients, String quantity, MyNutriment nutriments) {
+    public MyProduct(String name, String barcode, Ingredient[] ingredients, String quantity, MyNutriment nutriments) {
         this.name = name;
-        this.code = code;
+        this.barcode = barcode;
         this.ingredients = ingredients;
         this.quantity = quantity;
         this.nutriments = nutriments;
@@ -39,8 +39,8 @@ public class MyProduct {
         return name;
     }
 
-    public String getCode() {
-        return code;
+    public String getBarcode() {
+        return barcode;
     }
 
     public Ingredient[] getIngredients() {
@@ -59,8 +59,8 @@ public class MyProduct {
         this.name = name;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setBarcode(String barcode) {
+        this.barcode = barcode;
     }
 
     public void setIngredients(Ingredient[] ingredients) {
@@ -79,7 +79,7 @@ public class MyProduct {
     public String toString() {
         return "MyProduct{" +
                 "name='" + name + '\'' +
-                ", code='" + code + '\'' +
+                ", barcode='" + barcode + '\'' +
                 ", ingredients=" + Arrays.toString(ingredients) +
                 ", quantity='" + quantity + '\'' +
                 ", nutriments=" + nutriments +
