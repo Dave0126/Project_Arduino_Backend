@@ -5,20 +5,20 @@ import fr.gdai.ap.service.impl.MyProductServiceImpl;
 import fr.gdai.ap.utils.Result;
 import fr.gdai.ap.utils.ResultCode;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
-@RestController
+@CrossOrigin
+@Controller
 @RequestMapping("/product")
 public class ProductController {
 
     @Autowired
     private MyProductServiceImpl productService;
 
-    @GetMapping("/{barcode}")
-    public Result getProduct(@PathVariable String barcode) {
+    @RequestMapping ("/search")
+    @ResponseBody
+    public Result getProduct(String barcode) {
         Integer resultCode;
         String msg;
         MyProduct product = productService.transferOpenStackProduct2MyProduct(barcode);

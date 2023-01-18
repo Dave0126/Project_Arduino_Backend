@@ -3,6 +3,7 @@ package fr.gdai.ap.service.impl;
 import fr.gdai.ap.domain.MyProduct;
 import fr.gdai.ap.domain.User;
 import fr.gdai.ap.service.UserService;
+import fr.gdai.ap.utils.ResultCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,20 +40,24 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String addProductByUser(String name, String barcode) {
+    public Integer addProductByUser(String name, String barcode) {
         if ( !userMap.containsKey(name)) {
-            return "The username you entered does not exist!";
+//            return "The username you entered does not exist!";
+            return ResultCode.USER_NOTFOUND;
         }
         User userP = userMap.get(name);
         product = myProductService.transferOpenStackProduct2MyProduct(barcode);
         if( product == null){
-            return "The barcode you entered does not exist!";
+//            return "The barcode you entered does not exist!";
+            return  ResultCode.BARCODE_NOTFOUND;
         }
         if(!userP.getProductList().add(product)){
-            return "Failed to add product for user : " + name;
+//            return "Failed to add product for user : " + name;
+            return ResultCode.INSERT_ERR;
         }
         System.out.println(userP);
-        return "Successfully add product for user : " + name;
+//        return "Successfully add product for user : " + name;
+        return  ResultCode.INSERT_SUCC;
     }
 
     public User showUserByName(String name){
