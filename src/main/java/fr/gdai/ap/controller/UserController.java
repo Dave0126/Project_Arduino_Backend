@@ -34,13 +34,12 @@ public class UserController {
 
     @RequestMapping("/addProduct")
     @ResponseBody
-    // TODO 尝试使用状态码区分msg，将更改相应Service内的代码
     public Result addProductByUser(String username, String barcode){
         Integer code = userService.addProductByUser(username, barcode);
         String msg;
         if(code == ResultCode.BARCODE_NOTFOUND) {msg = "The barcode you entered does not exist!";}
         else if(code == ResultCode.USER_NOTFOUND) {msg = "The username you entered does not exist!";}
-        else if(code == ResultCode.INSERT_ERR) {msg = "Failed to add product for user";}
+        else if(code == ResultCode.INSERT_ERR) {msg = "Failed to add product for user!";}
         else {msg =  "Successfully add product for user";}
         return new Result(code, userService.showUserByName(username), msg);
     }
