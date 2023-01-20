@@ -1,5 +1,6 @@
 package fr.gdai.ap.service.impl;
 
+import fr.gdai.ap.domain.MyNutriment;
 import fr.gdai.ap.domain.MyProduct;
 import fr.gdai.ap.domain.User;
 import fr.gdai.ap.service.UserService;
@@ -51,10 +52,33 @@ public class UserServiceImpl implements UserService {
 //            return "The barcode you entered does not exist!";
             return  ResultCode.BARCODE_NOTFOUND;
         }
-        if(!userP.getProductList().add(product)){
+        /**
+         * 解决ArrayList中add()方法会覆盖之前对象的错误
+         * 问题: 个人认为是对象引用的问题，所以在此new一个新对象，在add()这个新对象
+         */
+        MyProduct productTemp = new MyProduct();
+        productTemp.setBarcode(product.getBarcode());
+        productTemp.setName(product.getName());
+        productTemp.setQuantity(product.getQuantity());
+        productTemp.setNutriments(new MyNutriment(product.getNutriments().getCalcium(),
+                product.getNutriments().getCarbohydrates(),
+                product.getNutriments().getEnergy()));
+        productTemp.setIngredients(product.getIngredients());
+
+        if(!userP.getProductList().add(productTemp)){
 //            return "Failed to add product for user : " + name;
             return ResultCode.INSERT_ERR;
         }
+        /**
+         * 每日营养总合
+         */
+        userP.setDailyEnergy(userP.getDailyEnergy() +
+                this.product.getNutriments().getEnergy() * (Integer.parseInt(this.product.getQuantity())/100));
+        userP.setDailyCalcium(userP.getDailyCalcium() +
+                this.product.getNutriments().getCalcium() * (Float.parseFloat(this.product.getQuantity())/100));
+        userP.setDailyCarbohydrates(userP.getDailyCarbohydrates() +
+                this.product.getNutriments().getCarbohydrates() * (Float.parseFloat(this.product.getQuantity())/100));
+
         System.out.println(userP);
 //        return "Successfully add product for user : " + name;
         return  ResultCode.INSERT_SUCC;

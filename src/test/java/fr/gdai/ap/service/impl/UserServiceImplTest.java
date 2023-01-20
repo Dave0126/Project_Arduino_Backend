@@ -44,5 +44,8 @@ public class UserServiceImplTest {
         userService.register(testUser);
         String barcode = "3228886043714";
         userService.addProductByUser("test", barcode);
+        userService.addProductByUser("test", "9002490205973");
+        userService.addProductByUser("test", barcode);
+        userService.addProductByUser("test", "9002490205973");
     }
 }
